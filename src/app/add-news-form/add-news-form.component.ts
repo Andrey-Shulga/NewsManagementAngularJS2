@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {News} from "../model/news";
+import {Location} from "@angular/common";
 
 @Component({
     selector: 'news-form',
@@ -8,12 +9,21 @@ import {News} from "../model/news";
 
 export class AddNewsFormComponent {
 
-    model = new News(1, 'Title', new Date, 'Brief', 'Content');
+    dt: Date = new Date;
+
+    model = new News('', this.dt, '', '');
 
     submitted = false;
 
     onSubmit() {
         this.submitted = true;
+    }
+
+    constructor(private location: Location) {
+    }
+
+    cancel() {
+        this.location.back();
     }
 
     // TODO: Remove this when we're done

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" align="left">
     <div [hidden]="submitted">
 
         <h2>News form</h2>
@@ -7,7 +7,7 @@
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" required
+                <input type="text" class="form-control" id="title" required maxlength="100"
                        [(ngModel)]="model.title" name="title"
                        #name="ngModel">
                 <div [hidden]="name.valid || name.pristine"
@@ -18,8 +18,10 @@
 
             <div class="form-group">
                 <label for="date">Date</label>
-                <input type="text" class="form-control" id="date"
-                       [(ngModel)]="model.date" name="date">
+
+                <input type="text" [ngModel]="model.date | date:'yyyy-MM-dd HH:mm:ss'" required readonly
+                       class="form-control" id="date" name="date" #name="ngModel">
+
                 <div [hidden]="name.valid || name.pristine"
                      class="alert alert-danger">
                     Date is required
@@ -28,8 +30,8 @@
 
             <div class="form-group">
                 <label for="brief">Brief</label>
-                <input type="text" class="form-control" id="brief"
-                       [(ngModel)]="model.brief" name="brief">
+                <textarea class="form-control" rows="3" id="brief" required maxlength="500"
+                          [(ngModel)]="model.brief" name="brief" #name="ngModel"></textarea>
                 <div [hidden]="name.valid || name.pristine"
                      class="alert alert-danger">
                     Brief is required
@@ -38,8 +40,8 @@
 
             <div class="form-group">
                 <label for="content">Content</label>
-                <input type="text" class="form-control" id="content"
-                       [(ngModel)]="model.content" name="content">
+                <textarea class="form-control" rows="7" id="content" required maxlength="2048"
+                          [(ngModel)]="model.content" name="content" #name="ngModel"></textarea>
                 <div [hidden]="name.valid || name.pristine"
                      class="alert alert-danger">
                     Content is required
@@ -47,7 +49,8 @@
             </div>
 
             <button type="submit" class="btn btn-success" [disabled]="!newsForm.form.valid">Add news</button>
-            <button type="button" class="btn btn-default" (click)="newNews(); newsForm.reset()">New Hero</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+
 
         </form>
     </div>
