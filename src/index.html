@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="css/style.css">
 
     <!-- Polyfill(s) for older browsers -->
     <script src="/node_modules/core-js/client/shim.min.js"></script>
@@ -20,6 +21,26 @@
   </head>
 
   <body>
-    <my-app>Loading AppComponent content here ...</my-app>
+
+  <div id="header">
+
+      <div align="left">
+          <a href="${prefix}/do/?action=lang&locale=en" style="color: white">English</a>
+          <a href="${prefix}/do/?action=lang&locale=ru" style="color: white">Русский</a>
+      </div>
+      <br>
+  </div>
+
+  <div id="menu" align="center">
+
+  </div>
+
+  <div id="body">
+      <my-app>Loading AppComponent content here ...</my-app>
+
+  </div>
+
+  <div id="footer" align="center">&copy; EPAM SYSTEMS 2017</div>
+
   </body>
 </html>
