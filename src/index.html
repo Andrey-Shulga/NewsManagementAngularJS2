@@ -1,46 +1,42 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>Angular QuickStart</title>
+<head>
+    <!-- Set the base href -->
     <base href="/">
+    <title>Angular Router</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-      <link rel="stylesheet" href="css/style.css">
-
-    <!-- Polyfill(s) for older browsers -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Polyfills -->
     <script src="/node_modules/core-js/client/shim.min.js"></script>
-
     <script src="/node_modules/zone.js/dist/zone.js"></script>
     <script src="/node_modules/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
+        System.import('main.js')
+            .catch(function (err) {
+                console.error(err);
+            });
     </script>
-  </head>
+</head>
+<body>
 
-  <body>
+<div id="header">
+    <h1>Header</h1>
+</div>
 
-  <div id="header">
+<div id="menu" align="center">
 
-      <div align="left">
-          <a href="${prefix}/do/?action=lang&locale=en" style="color: white">English</a>
-          <a href="${prefix}/do/?action=lang&locale=ru" style="color: white">Русский</a>
-      </div>
-      <br>
-  </div>
 
-  <div id="menu" align="center">
+</div>
 
-  </div>
+<div id="body">
+    <my-app>loading...</my-app>
+</div>
 
-  <div id="body">
-      <my-app>Loading AppComponent content here ...</my-app>
+<div id="footer">
+    &copy; EPAM SYSTEMS 2017
+</div>
 
-  </div>
-
-  <div id="footer" align="center">&copy; EPAM SYSTEMS 2017</div>
-
-  </body>
+</body>
 </html>
