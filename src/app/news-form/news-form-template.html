@@ -1,5 +1,6 @@
 <head><title>{{title}}</title></head>
 <div class="container" align="left">
+
     <div [hidden]="submitted">
 
         <h3>News form</h3><br>
@@ -53,5 +54,13 @@
 
             </div>
         </form>
+    </div>
+
+    <div [hidden]="!submitted">
+        <h3>You added the following news:</h3>
+
+
+        <br>
+        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
     </div>
 </div>
