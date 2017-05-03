@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {AppMenuModule} from './app-menu.module';
 
 import {NewsListComponent} from './news-list/news-list.component';
-import {AddNewsFormComponent} from './add-news-form/news-form.component';
+import {AddNewsFormComponent} from './news-form/news-form.component';
 import {PageNotFoundComponent} from './not-found.component';
 
 @NgModule({

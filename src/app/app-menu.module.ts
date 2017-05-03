@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {NewsListComponent} from './news-list/news-list.component';
-import {AddNewsFormComponent} from './add-news-form/news-form.component';
+import {AddNewsFormComponent} from './news-form/news-form.component';
 import {PageNotFoundComponent} from './not-found.component';
 
 const appRoutes: Routes = [
