@@ -9,6 +9,7 @@ import {Location} from '@angular/common';
 
 export class AddNewsFormComponent {
 
+    title = 'Add news';
     dt: Date = new Date;
 
     model = new News('', this.dt, '', '');
