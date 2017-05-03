@@ -4,8 +4,8 @@
     <div [hidden]="submitted">
 
         <h3>News form</h3><br>
-
-        <form (ngSubmit)="onSubmit()" #newsForm="ngForm">
+        <div *ngIf="model">
+            <form (ngSubmit)="onSubmit(model)" #newsForm="ngForm">
             <div *ngIf="model">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -54,13 +54,17 @@
 
             </div>
         </form>
+        </div>
+
     </div>
 
     <div [hidden]="!submitted">
         <h3>You added the following news:</h3>
-
+        <div *ngIf="savedNews">
+            {{savedNews.title}}
+        </div>
 
         <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+        <button class="btn btn-primary" (click)="edit()">Edit</button>
     </div>
 </div>

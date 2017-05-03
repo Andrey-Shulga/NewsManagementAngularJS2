@@ -13,17 +13,22 @@ export class AddNewsFormComponent {
     title = 'Add news';
     dt: Date = new Date;
     submitted = false;
-    private model = new News('', this.dt, '', '');
-    // ngOnInit() {
-    //     this.newsService.setEmptyNews().then(model => this.model = model);
-    // }
-    onSubmit(): void {
+    model = new News('', this.dt, '', '');
+    savedNews: News;
+
+    ngOnInit() {
+        this.newsService.setEmptyNews().then(model => this.model = model);
+    }
+
+    onSubmit(news: News): void {
         this.submitted = true;
-        if (!this.model) {
-            return;
-        }
         this.newsService.save(new News(this.model.title, this.model.date, this.model.brief, this.model.content))
             .then(model => this.model = model);
+        this.savedNews = news;
+    }
+
+    edit() {
+        this.submitted = false;
     }
     constructor(private location: Location, private newsService: NewsService) {
     }
