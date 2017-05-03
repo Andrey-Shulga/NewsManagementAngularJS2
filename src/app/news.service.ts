@@ -8,6 +8,6 @@ export class NewsService {
     model = new News('', this.dt, '', '');
 
     setEmptyNews() {
-        return this.model;
+        return Promise.resolve(this.model);
     }
 }

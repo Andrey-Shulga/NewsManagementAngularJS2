@@ -17,7 +17,7 @@ export class AddNewsFormComponent {
     private model: News;
 
     ngOnInit() {
-        this.model = this.newsService.setEmptyNews();
+        this.newsService.setEmptyNews().then(model => this.model = model);
     }
     onSubmit() {
         this.submitted = true;
