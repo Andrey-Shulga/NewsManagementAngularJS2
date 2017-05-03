@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {News} from '../model/news';
-import {Location} from '@angular/common';
-import {NewsService} from '../news.service';
+import {Component} from "@angular/core";
+import {News} from "../model/news";
+import {Location} from "@angular/common";
+import {NewsService} from "../news.service";
 
 @Component({
     selector: 'news-form',
@@ -13,25 +13,25 @@ export class AddNewsFormComponent {
     title = 'Add news';
     dt: Date = new Date;
     submitted = false;
-    model = new News('', this.dt, '', '');
-    savedNews: News;
+    model = new News(0, '', this.dt, '', '');
 
-    ngOnInit() {
-        this.newsService.setEmptyNews().then(model => this.model = model);
-    }
-
-    onSubmit(news: News): void {
+    onSubmit() {
+        this.newsService.save(this.model)
+            .subscribe(resBody => this.model = resBody,
+                error => console.error('Error: ' + error),
+                () => console.log('Post save completed!', this.model)
+            );
         this.submitted = true;
-        this.newsService.save(new News(this.model.title, this.model.date, this.model.brief, this.model.content))
-            .then(model => this.model = model);
-        this.savedNews = news;
     }
 
-    edit() {
+    edit(news: News) {
+        this.model = news;
         this.submitted = false;
     }
+
     constructor(private location: Location, private newsService: NewsService) {
     }
+
     cancel() {
         this.location.back();
     }

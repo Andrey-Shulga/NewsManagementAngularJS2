@@ -1,70 +1,96 @@
-<head><title>{{title}}</title></head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{title}}</title>
+</head>
 <div class="container" align="left">
 
     <div [hidden]="submitted">
 
         <h3>News form</h3><br>
         <div *ngIf="model">
-            <form (ngSubmit)="onSubmit(model)" #newsForm="ngForm">
+            <form (ngSubmit)="onSubmit()" #newsForm="ngForm">
+                <input type="text" [(ngModel)]="model.id" name="id" id="id" #id="ngModel">
+                <div *ngIf="model">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" required maxlength="100"
+                               [(ngModel)]="model.title" name="title"
+                               #name="ngModel">
+                        <div [hidden]="name.valid || name.pristine"
+                             class="alert alert-danger">
+                            Title is required
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+
+                        <input type="text" [ngModel]="model.date | date:'yyyy-MM-dd HH:mm:ss'" required readonly
+                               class="form-control" id="date" name="date" #date="ngModel">
+                        <div [hidden]="date.valid || date.pristine"
+                             class="alert alert-danger">
+                            Date is required
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brief">Brief</label>
+                        <textarea class="form-control" rows="3" id="brief" required maxlength="500"
+                                  [(ngModel)]="model.brief" name="brief" #brief="ngModel"></textarea>
+                        <div [hidden]="brief.valid || brief.pristine"
+                             class="alert alert-danger">
+                            Brief is required
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea class="form-control" rows="7" id="content" required maxlength="2048"
+                                  [(ngModel)]="model.content" name="content" #content="ngModel"></textarea>
+                        <div [hidden]="content.valid || content.pristine"
+                             class="alert alert-danger">
+                            Content is required
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" [disabled]="!newsForm.form.valid">Add news</button>
+                    <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" align="left">
+        <div [hidden]="!submitted">
+            <h3>You added the following news:</h3>
             <div *ngIf="model">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" required maxlength="100"
-                           [(ngModel)]="model.title" name="title"
-                           #name="ngModel">
-                    <div [hidden]="name.valid || name.pristine"
-                         class="alert alert-danger">
-                        Title is required
-                    </div>
+
+                <div class="row">
+                    <div class="col-xs-3">Id</div>
+                    <div class="col-xs-9  pull-left">{{ model.id }}</div>
+
+                    <div class="col-xs-3">Title</div>
+                    <div class="col-xs-9  pull-left">{{ model.title }}</div>
+
+
+                    <div class="col-xs-3">Date</div>
+                    <div class="col-xs-9  pull-left">{{ model.date | date:'yyyy-MM-dd HH:mm:ss' }}</div>
+
+
+                    <div class="col-xs-3">Brief</div>
+                    <div class="col-xs-9  pull-left">{{ model.brief }}</div>
+
+
+                    <div class="col-xs-3">Content</div>
+                    <div class="col-xs-9  pull-left">{{ model.content }}</div>
+
+                    <button class="btn btn-primary" (click)="edit(model)">Edit</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="date">Date</label>
-
-                    <input type="text" [ngModel]="model.date | date:'yyyy-MM-dd HH:mm:ss'" required readonly
-                           class="form-control" id="date" name="date" #date="ngModel">
-                    <div [hidden]="date.valid || date.pristine"
-                         class="alert alert-danger">
-                        Date is required
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="brief">Brief</label>
-                    <textarea class="form-control" rows="3" id="brief" required maxlength="500"
-                              [(ngModel)]="model.brief" name="brief" #brief="ngModel"></textarea>
-                    <div [hidden]="brief.valid || brief.pristine"
-                         class="alert alert-danger">
-                        Brief is required
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea class="form-control" rows="7" id="content" required maxlength="2048"
-                              [(ngModel)]="model.content" name="content" #content="ngModel"></textarea>
-                    <div [hidden]="content.valid || content.pristine"
-                         class="alert alert-danger">
-                        Content is required
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-success" [disabled]="!newsForm.form.valid">Add news</button>
-                <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
-
             </div>
-        </form>
+
         </div>
 
     </div>
 
-    <div [hidden]="!submitted">
-        <h3>You added the following news:</h3>
-        <div *ngIf="savedNews">
-            {{savedNews.title}}
-        </div>
 
-        <br>
-        <button class="btn btn-primary" (click)="edit()">Edit</button>
-    </div>
-</div>
