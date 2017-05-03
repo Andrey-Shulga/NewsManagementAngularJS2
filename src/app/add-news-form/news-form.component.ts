@@ -1,10 +1,10 @@
-import {Component} from "@angular/core";
-import {News} from "../model/news";
-import {Location} from "@angular/common";
+import {Component} from '@angular/core';
+import {News} from '../model/news';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'news-form',
-    templateUrl: './add-news-form.html'
+    templateUrl: './news-form-template.html'
 })
 
 export class AddNewsFormComponent {
