@@ -11,12 +11,18 @@
             <div *ngIf="model">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" required maxlength="100"
-                           [(ngModel)]="model.title" name="title"
-                           #name="ngModel">
-                    <div [hidden]="name.valid || name.pristine"
-                         class="alert alert-danger">
-                        Title is required
+                    <input type="text" class="form-control" id="title" required minlength="1" maxlength="100"
+                           [(ngModel)]="model.title" name="title" #title="ngModel">
+                    <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                        <p *ngIf="title.errors && title.errors.required" danger padding-left>
+                            Title is required
+                        </p>
+                        <p *ngIf="title.errors && title.errors.minlength" danger padding-left>
+                            Min length should be at least 1
+                        </p>
+                        <p *ngIf="title.errors && title.errors.maxlength" danger padding-left>
+                            Max length should not more 100
+                        </p>
                     </div>
                 </div>
 
@@ -25,29 +31,42 @@
 
                     <input type="text" [ngModel]="model.date | date:'yyyy-MM-dd HH:mm:ss'" required readonly
                            class="form-control" id="date" name="date" #date="ngModel">
-                    <div [hidden]="date.valid || date.pristine"
-                         class="alert alert-danger">
+                    <div [hidden]="date.valid || date.pristine" class="alert alert-danger">
                         Date is required
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="brief">Brief</label>
-                    <textarea class="form-control" rows="3" id="brief" required maxlength="500"
+                    <textarea class="form-control" rows="3" id="brief" required minlength="1" maxlength="500"
                               [(ngModel)]="model.brief" name="brief" #brief="ngModel"></textarea>
-                    <div [hidden]="brief.valid || brief.pristine"
-                         class="alert alert-danger">
-                        Brief is required
+                    <div [hidden]="brief.valid || brief.pristine" class="alert alert-danger">
+                        <p *ngIf="brief.errors && brief.errors.required" danger padding-left>
+                            Brief is required
+                        </p>
+                        <p *ngIf="brief.errors && brief.errors.minlength" danger padding-left>
+                            Min length should be at least 1
+                        </p>
+                        <p *ngIf="brief.errors && brief.errors.maxlength" danger padding-left>
+                            Max length should not more 500
+                        </p>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" rows="7" id="content" required maxlength="2048"
+                    <textarea class="form-control" rows="7" id="content" required minlength="1" maxlength="2048"
                               [(ngModel)]="model.content" name="content" #content="ngModel"></textarea>
-                    <div [hidden]="content.valid || content.pristine"
-                         class="alert alert-danger">
-                        Content is required
+                    <div [hidden]="content.valid || content.pristine" class="alert alert-danger">
+                        <p *ngIf="content.errors && content.errors.required" danger padding-left>
+                            Brief is required
+                        </p>
+                        <p *ngIf="content.errors && content.errors.minlength" danger padding-left>
+                            Min length should be at least 1
+                        </p>
+                        <p *ngIf="content.errors && content.errors.maxlength" danger padding-left>
+                            Max length should not more 2048
+                        </p>
                     </div>
                 </div>
 
