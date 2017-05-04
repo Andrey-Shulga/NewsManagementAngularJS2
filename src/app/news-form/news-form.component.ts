@@ -13,16 +13,20 @@ import {News} from '../model/news';
 
 export class AddNewsFormComponent implements OnInit {
     title = 'Add news';
-    dt: Date = new Date;
+    currentDateTime: Date = new Date;
     submitted = false;
-    model = new News(0, '', this.dt, '', '');
+    model = new News(0, '', this.currentDateTime, '', '');
+    newsId: number;
 
     constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        if (this.model.id !== 0) {
-            this.route.params.switchMap((params: Params) => this.newsService.getById(+params['id']))
+        this.route.params.subscribe((params: Params) => {
+            this.newsId = params['id']
+        });
+        if (this.newsId) {
+            this.newsService.getById(this.newsId)
                 .subscribe(news => this.model = news,
                     error => console.error('Error: ' + error),
                     () => console.log('Get by id completed!', this.model)
