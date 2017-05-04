@@ -10,6 +10,7 @@ import {Observable} from 'rxjs/Observable';
 export class NewsService {
 
     private saveNewsPostRequest = 'http://localhost:8081/rest/news/save';
+    private getNewsListGetRequest = 'http://localhost:8081/rest/news';
     private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
     constructor(private http: Http) {
@@ -19,4 +20,10 @@ export class NewsService {
         return this.http.post(this.saveNewsPostRequest, JSON.stringify(news), {headers: this.headers})
             .map(response => response.json());
     }
+
+    getAll(): Observable<News[]> {
+        return this.http.get(this.getNewsListGetRequest)
+            .map(res => <News[]> res.json())
+    }
+
 }

@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {News} from "../model/news";
-import {Location} from "@angular/common";
-import {NewsService} from "../news.service";
+import {Component} from '@angular/core';
+import {News} from '../model/news';
+import {Location} from '@angular/common';
+import {NewsService} from '../news.service';
 
 @Component({
     selector: 'news-form',

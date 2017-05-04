@@ -1,2 +1,24 @@
 <head><title>{{title}}</title></head>
-<div class="container" align="left"><h3>News list</h3></div>
+<div class="container" align="left">
+    <h3>News list</h3>
+
+    <li *ngFor="let news of newsList">
+
+        <table border="3" width="70%">
+            <tr>
+                <td>
+                    <h4>{{news.title}}</h4>
+                    <small>
+                        <ins>{{news.date}}</ins>
+                    </small>
+                    <br><br>
+                    {{news.brief}} <br>
+                </td>
+            </tr>
+
+        </table>
+        <button class="delete"
+                (click)="delete(hero); $event.stopPropagation()">x
+        </button>
+    </li>
+</div>
