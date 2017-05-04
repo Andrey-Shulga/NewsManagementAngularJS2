@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
+import 'rxjs/add/operator/switchMap';
 
 import {NewsService} from '../news.service';
 import {News} from '../model/news';
@@ -21,10 +22,11 @@ export class AddNewsFormComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.model.id !== 0) {
-            this.newsService.getById(this.model.id)
+            this.route.params.switchMap((params: Params) => this.newsService.getById(+params['id']))
                 .subscribe(news => this.model = news,
                     error => console.error('Error: ' + error),
-                    () => console.log('Get news by id completed!', this.model));
+                    () => console.log('Get by id completed!', this.model)
+                );
         }
     }
 

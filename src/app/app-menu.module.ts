@@ -8,6 +8,7 @@ import {PageNotFoundComponent} from './not-found.component';
 const appRoutes: Routes = [
     {path: 'news-list', component: NewsListComponent},
     {path: 'add-news', component: AddNewsFormComponent},
+    {path: 'add-news/:id', component: AddNewsFormComponent},
     {path: '', redirectTo: '/news-list', pathMatch: 'full'},
     {path: '**', component: PageNotFoundComponent}
 ];
