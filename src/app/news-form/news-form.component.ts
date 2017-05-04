@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {Location} from '@angular/common';
-import 'rxjs/add/operator/switchMap';
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Location} from "@angular/common";
+import "rxjs/add/operator/switchMap";
+import "rxjs/add/operator/finally";
 
-import {NewsService} from '../news.service';
-import {News} from '../model/news';
+import {NewsService} from "../news.service";
+import {News} from "../model/news";
 
 @Component({
     selector: 'news-form',
@@ -14,11 +15,10 @@ import {News} from '../model/news';
 export class AddNewsFormComponent implements OnInit {
     title = 'Add news';
     currentDateTime: Date = new Date;
-    submitted = false;
     model = new News(0, '', this.currentDateTime, '', '');
     newsId: number;
 
-    constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute) {
+    constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute, private forward: Router) {
     }
 
     ngOnInit(): void {
@@ -31,7 +31,8 @@ export class AddNewsFormComponent implements OnInit {
         });
         if (this.newsId) {
             this.newsService.getById(this.newsId)
-                .subscribe(news => this.model = news,
+                .subscribe(
+                    news => this.model = news,
                     error => console.error('Error: ' + error),
                     () => console.log('Get by id completed!', this.model)
                 );
@@ -40,25 +41,20 @@ export class AddNewsFormComponent implements OnInit {
 
     onSubmit() {
         this.newsService.save(this.model)
-            .subscribe(news => this.model = news,
+            .finally(() => this.forwardToView())
+            .subscribe(
+                news => this.model = news,
                 error => console.error('Error: ' + error),
                 () => console.log('Post save completed!', this.model)
             );
-        this.submitted = true;
     }
 
-    edit(news: News) {
-        this.model = news;
-        this.submitted = false;
+    forwardToView() {
+        this.forward.navigate([`/news-view/${this.model.id}`])
     }
 
     cancel() {
         this.location.back();
-    }
-
-    // TODO: Remove this when we're done
-    get diagnostic() {
-        return JSON.stringify(this.model);
     }
 
 

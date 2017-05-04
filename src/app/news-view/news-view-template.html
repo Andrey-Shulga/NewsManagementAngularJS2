@@ -4,9 +4,10 @@
 </head>
 
 <div class="container" align="left">
-    <div [hidden]="!submitted">
+
+
+    <div *ngIf="model">
         <h3>You added the following news:</h3>
-        <div *ngIf="model">
 
             <div class="row">
                 <div class="col-xs-3">Id</div>
@@ -32,6 +33,5 @@
             </div>
         </div>
 
-    </div>
 
 </div>

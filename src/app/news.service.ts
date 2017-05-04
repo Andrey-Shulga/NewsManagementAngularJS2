@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Observable';
+import {Injectable} from "@angular/core";
+import {Headers, Http} from "@angular/http";
+import "rxjs/add/operator/toPromise";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import {Observable} from "rxjs/Observable";
 
-import {News} from './model/news';
+import {News} from "./model/news";
 
 @Injectable()
 export class NewsService {
 
-    private saveNewsPostRequest = 'http://localhost:8081/rest/news/save';
-    private getNewsListGetRequest = 'http://localhost:8081/rest/news';
+    private saveNewsPostRequest = 'http://localhost:8082/rest/news/save';
+    private getNewsListGetRequest = 'http://localhost:8082/rest/news';
     private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
     constructor(private http: Http) {
