@@ -1,1 +1,37 @@
-<head><title>{{title}}</title></head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{title}}</title>
+</head>
+
+<div class="container" align="left">
+    <div [hidden]="!submitted">
+        <h3>You added the following news:</h3>
+        <div *ngIf="model">
+
+            <div class="row">
+                <div class="col-xs-3">Id</div>
+                <div class="col-xs-9  pull-left">{{ model.id }}</div>
+
+                <div class="col-xs-3">Title</div>
+                <div class="col-xs-9  pull-left">{{ model.title }}</div>
+
+
+                <div class="col-xs-3">Date</div>
+                <div class="col-xs-9  pull-left">{{ model.date | date:'yyyy-MM-dd HH:mm:ss' }}</div>
+
+
+                <div class="col-xs-3">Brief</div>
+                <div class="col-xs-9  pull-left">{{ model.brief }}</div>
+
+
+                <div class="col-xs-3">Content</div>
+                <div class="col-xs-9  pull-left">{{ model.content }}</div>
+
+                <button class="btn btn-primary" (click)="edit(model)">Edit</button>
+                <button class="btn btn-primary" (click)="delete(model)">Delete</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
