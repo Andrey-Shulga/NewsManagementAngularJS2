@@ -18,7 +18,7 @@
 
         </table>
         <nav>
-            <a routerLink="/news-list">view</a>
+            <a [routerLink]="['/add-news', news.id]">view</a>
             <a [routerLink]="['/add-news', news.id]">edit</a>
         </nav>
     </ul>

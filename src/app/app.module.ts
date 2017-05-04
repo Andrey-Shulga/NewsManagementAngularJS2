@@ -8,6 +8,7 @@ import {AppMenuModule} from './app-menu.module';
 
 import {NewsListComponent} from './news-list/news-list.component';
 import {AddNewsFormComponent} from './news-form/news-form.component';
+import {NewsViewComponent} from './news-view/news-view.component';
 import {PageNotFoundComponent} from './not-found.component';
 import {NewsService} from './news.service';
 
@@ -22,6 +23,7 @@ import {NewsService} from './news.service';
         AppComponent,
         NewsListComponent,
         AddNewsFormComponent,
+        NewsViewComponent,
         PageNotFoundComponent
     ],
     providers: [NewsService],

@@ -21,8 +21,7 @@ export class NewsListComponent implements OnInit {
     getAll() {
         this.newsService.getAll()
             .subscribe(resBody => this.newsList = resBody,
-                error => console.error('Error: ' + error),
-                () => console.log('Get news list completed!', this.newsList)
+                error => console.error('Error: ' + error)
             );
     }
 }
