@@ -1,8 +1,8 @@
 <head><title>{{title}}</title></head>
-<div class="container" align="left">
+<div class="container">
     <h3>News list</h3>
 
-    <li *ngFor="let news of newsList">
+    <ul *ngFor="let news of newsList">
 
         <table border="3" width="70%">
             <tr>
@@ -17,8 +17,9 @@
             </tr>
 
         </table>
-        <button class="delete"
-                (click)="delete(hero); $event.stopPropagation()">x
-        </button>
-    </li>
+        <nav>
+            <a routerLink="/news-list">view</a>
+            <a routerLink="/add-news" (click)="goToForm()">edit</a>
+        </nav>
+    </ul>
 </div>

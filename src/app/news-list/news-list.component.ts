@@ -17,7 +17,10 @@ export class NewsListComponent implements OnInit {
                 error => console.error('Error: ' + error),
                 () => console.log('Get news list completed!', this.newsList)
             );
-        this.title = '111';
+    }
+
+    goToForm() {
+
     }
 
     constructor(private newsService: NewsService) {

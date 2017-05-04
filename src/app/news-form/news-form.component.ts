@@ -1,23 +1,36 @@
-import {Component} from '@angular/core';
-import {News} from '../model/news';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+
 import {NewsService} from '../news.service';
+import {News} from '../model/news';
 
 @Component({
     selector: 'news-form',
     templateUrl: './news-form-template.html'
 })
 
-export class AddNewsFormComponent {
-
+export class AddNewsFormComponent implements OnInit {
     title = 'Add news';
     dt: Date = new Date;
     submitted = false;
     model = new News(0, '', this.dt, '', '');
 
+    constructor(private location: Location, private newsService: NewsService, private route: ActivatedRoute) {
+    }
+
+    ngOnInit(): void {
+        if (this.model.id !== 0) {
+            this.newsService.getById(this.model.id)
+                .subscribe(news => this.model = news,
+                    error => console.error('Error: ' + error),
+                    () => console.log('Get news by id completed!', this.model));
+        }
+    }
+
     onSubmit() {
         this.newsService.save(this.model)
-            .subscribe(resBody => this.model = resBody,
+            .subscribe(news => this.model = news,
                 error => console.error('Error: ' + error),
                 () => console.log('Post save completed!', this.model)
             );
@@ -27,9 +40,6 @@ export class AddNewsFormComponent {
     edit(news: News) {
         this.model = news;
         this.submitted = false;
-    }
-
-    constructor(private location: Location, private newsService: NewsService) {
     }
 
     cancel() {
