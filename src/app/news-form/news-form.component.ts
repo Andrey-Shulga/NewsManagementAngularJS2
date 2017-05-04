@@ -22,6 +22,10 @@ export class AddNewsFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getById();
+    }
+
+    getById() {
         this.route.params.subscribe((params: Params) => {
             this.newsId = params['id']
         });
