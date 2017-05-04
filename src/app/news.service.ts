@@ -12,6 +12,7 @@ export class NewsService {
 
     private saveNewsPostRequest = 'http://localhost:8082/rest/news/save';
     private getNewsListGetRequest = 'http://localhost:8082/rest/news';
+    private deleteNewsByIdPostRequest = 'http://localhost:8082/rest/news/delete';
     private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
     constructor(private http: Http) {
@@ -33,6 +34,12 @@ export class NewsService {
         const url = `${this.getNewsListGetRequest}/get/${id}`;
         return this.http.get(url)
             .map(response => <News> response.json())
+            .catch(this.handleError);
+    }
+
+    deleteById(id: number): Observable<News> {
+        return this.http.post(this.deleteNewsByIdPostRequest, JSON.stringify(id), {headers: this.headers})
+            .map(res => res.json())
             .catch(this.handleError);
     }
 

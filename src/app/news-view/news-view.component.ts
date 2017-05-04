@@ -1,8 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-
+import "rxjs/add/operator/finally";
 import {NewsService} from "../news.service";
 import {News} from "../model/news";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+
 
 @Component({
     templateUrl: './news-view-template.html'
@@ -33,7 +34,21 @@ export class NewsViewComponent implements OnInit {
         }
     }
 
-    edit(news: News) {
+    editModel(news: News) {
         this.forward.navigate([`/add-news/${news.id}`])
+    }
+
+    deleteModel(news: News) {
+        this.newsService.deleteById(news.id)
+            .finally(() => this.forwardToNewsList())
+            .subscribe(
+                res => this.model = res,
+                error => console.error('Error: ' + error),
+                () => console.log('Post delete completed!', this.model)
+            );
+    }
+
+    private forwardToNewsList() {
+        this.forward.navigate(['/news-list']);
     }
 }
