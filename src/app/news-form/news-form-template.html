@@ -7,7 +7,7 @@
     <div *ngIf="model">
         <h3>News form</h3><br>
         <form (ngSubmit)="onSubmit()" #newsForm="ngForm">
-            <input type="text" [(ngModel)]="model.id" name="id" id="id" #id="ngModel">
+
             <div *ngIf="model">
                 <div class="form-group">
                     <label for="title">Title</label>
