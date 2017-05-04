@@ -29,7 +29,54 @@
                 <div class="col-xs-9  pull-left">{{ model.content }}</div>
 
                 <button class="btn btn-primary" (click)="editModel(model)">Edit</button>
-                <button class="btn btn-primary" (click)="deleteModel(model)">Delete</button>
+
+                <button class="btn btn-primary" (click)="modal1.show()">Delete</button>
+                <app-modal #modal1>
+                    <div class="app-modal-header">
+                        Confirmation request
+                    </div>
+                    <div class="app-modal-body">
+                        Delete this news?<br><br>
+                        <b> Title: </b>{{model.title}}<br>
+                        <b> Date: </b>{{ model.date | date:'yyyy-MM-dd HH:mm:ss' }}
+
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="deleteModel(model)">Delete</button>
+                        <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
+                        <!-- <button type="button" class="btn btn-default" (click)="modal2.show()">Show modal 2</button> -->
+
+                    </div>
+                </app-modal>
+
+                <app-modal #modal2>
+                    <div class="app-modal-header">
+                        header
+                    </div>
+                    <div class="app-modal-body">
+                        Modal 2
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-default" (click)="modal2.hide()">Close</button>
+                        <button type="button" class="btn btn-default" (click)="modal3.show()">Show modal 3</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </app-modal>
+
+                <app-modal #modal3>
+                    <div class="app-modal-header">
+                        header
+                    </div>
+                    <div class="app-modal-body">
+                        Modal 3
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-default" (click)="modal3.hide()">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </app-modal>
+
+
             </div>
         </div>
 
