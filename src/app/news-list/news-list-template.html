@@ -1,6 +1,6 @@
 <head><title>{{title}}</title></head>
 <div class="container">
-    <form (ngSubmit)="onSubmit()" #newsListForm="ngForm">
+    <form (ngSubmit)="modal1.show()" #newsListForm="ngForm">
         <div class="form-group">
             <h3>News list</h3>
 
@@ -24,8 +24,28 @@
                     <a [routerLink]="['/add-news', news.id]">edit</a>
                     <input type="checkbox" [value]="news" (change)="updateChecked($event, news)">
                 </nav>
+                <br>
             </ul>
+            <br>
             <button type="submit" class="btn btn-success">Delete news</button>
+
+            <app-modal #modal1>
+                <div class="app-modal-header">
+                    Confirmation request
+                </div>
+                <div class="app-modal-body">
+                    You are going to delete {{checkedNews.length}} news.<br>
+                    Are you sure?
+
+                </div>
+                <div class="app-modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="onSubmit(); modal1.hide()">Delete</button>
+                    <button type="button" class="btn btn-default" (click)="modal1.hide()">Cancel</button>
+                    <!-- <button type="button" class="btn btn-default" (click)="modal2.show()">Show modal 2</button> -->
+
+                </div>
+            </app-modal>
+
         </div>
     </form>
 </div>
