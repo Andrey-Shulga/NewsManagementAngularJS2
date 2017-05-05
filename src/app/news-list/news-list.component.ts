@@ -45,7 +45,9 @@ export class NewsListComponent implements OnInit {
 
     onSubmit() {
         this.newsService.deleteList(this.checkedNews)
-            .finally(() => this.forwardToNewsList())
+            .finally(() => {
+                this.getAll();
+            })
             .subscribe(
                 res => this.checkedNews = res,
                 error => console.error('Error: ' + error),
