@@ -1,18 +1,19 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/catch";
-import {Observable} from "rxjs/Observable";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {Observable} from 'rxjs/Observable';
 
-import {News} from "./model/news";
+import {News} from './model/news';
 
 @Injectable()
 export class NewsService {
 
-    private saveNewsPostRequest = 'http://localhost:8082/rest/news/save';
-    private getNewsListGetRequest = 'http://localhost:8082/rest/news';
-    private deleteNewsByIdPostRequest = 'http://localhost:8082/rest/news/delete';
+    private saveNewsPostRequest = 'http://localhost:8081/rest/news/save';
+    private getNewsListGetRequest = 'http://localhost:8081/rest/news';
+    private deleteNewsByIdPostRequest = 'http://localhost:8081/rest/news/delete';
+    private deleteNewsListPostRequest = 'http://localhost:8081/rest/news/delete/list';
     private headers = new Headers({'Content-Type': 'application/json;charset=UTF-8'});
 
     constructor(private http: Http) {
@@ -39,6 +40,12 @@ export class NewsService {
 
     deleteById(id: number): Observable<News> {
         return this.http.post(this.deleteNewsByIdPostRequest, JSON.stringify(id), {headers: this.headers})
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    deleteList(newsList: News[]): Observable<News[]> {
+        return this.http.post(this.deleteNewsListPostRequest, JSON.stringify(newsList), {headers: this.headers})
             .map(res => res.json())
             .catch(this.handleError);
     }
