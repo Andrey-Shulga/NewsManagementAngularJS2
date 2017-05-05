@@ -27,7 +27,7 @@
                 <br>
             </ul>
             <br>
-            <button type="submit" class="btn btn-success">Delete news</button>
+            <button type="submit" class="btn btn-success" [disabled]="checkedNews.length===0">Delete news</button>
 
             <app-modal #modal1>
                 <div class="app-modal-header">
